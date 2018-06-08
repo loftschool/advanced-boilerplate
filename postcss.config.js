@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 module.exports = {
   syntax: "postcss-scss",
   plugins: [
@@ -9,7 +11,10 @@ module.exports = {
       cascade: false
     }),
     require("postcss-advanced-variables")({
-      variables: require("./src/assets/styles/variables")
+      // variables: require("./src/assets/styles/variables")
+      variables: JSON.parse(
+        fs.readFileSync("./src/assets/styles/variables.json", "utf-8")
+      )
     }),
     require("postcss-nested"),
     require("postcss-rgb"),
