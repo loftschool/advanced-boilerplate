@@ -6,28 +6,26 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title Document
     style.
-      .fade-enter-active,
-      .fade-leave-active  {
+      .fade-enter-active, .fade-leave-active {
         transition: 1s;
       }
-
-      .fade-enter { 
+      
+      .fade-enter {
         opacity: 0;
       }
 
       .fade-enter-to {
-        opacity: 1
+        opacity: 1;
       }
 
       .fade-leave {
-        transform: translateX(0%);
         opacity: 1;
       }
 
       .fade-leave-to {
-        transform: translateX(20px);
         opacity: 0;
       }
+
 
   body
     #animation-root
@@ -35,19 +33,11 @@ html(lang="en")
     script(type="text/x-template")#animation
       div
         button(
-          @click="currentComponent === 'compA' ? currentComponent = 'compB' : currentComponent = 'compA' "
+          @click="title = `Changed title ${Date.now()}`"
         ) Показать
-        pre {{currentComponent}}
-        transition(name="fade")
-          component(:is="currentComponent")
-        //- transition(name="fade")
-          .test-block(v-if="show") Тестовый блок
+        transition-group(name="fade")
+          .class(:key="title") {{ title }}
 
-    script(type="text/x-template")#component-a
-      h1 А
-
-    script(type="text/x-template")#component-b
-      h1 В
 
     script(src="bootloader.bundle.js")
     script(src="vendor.bundle.js")
