@@ -1,0 +1,42 @@
+script(type="text/x-template")#slider
+  .slider
+    info(:work="currentWork")
+    display(:work="currentWork")
+    buttons(
+      :works="works" 
+      :currentIndex="currentIndex"
+      @slide="handleSlide"
+    )
+
+script(type="text/x-template")#slider-info
+  .slider__info-container
+    .slider__info
+      .slider__info-title
+        .subtitle {{work.title}}
+      transition-group(
+        appear
+        :css="false"
+        @leave="leave"
+        @enter="enter"
+      )
+        .slider__info-skills(:key="work.skills") {{work.skills}}
+      .slider__info-button
+        a(:href="work.link" target="_blank").iconed-button
+          .iconed-button__icon
+            i.fa.fa-link
+          .iconed-button__text Посмотреть сайт  
+
+script(type="text/x-template")#slider-display
+  .slider__display
+    img(:src="work.photo", alt="").slider__big-pic
+
+script(type="text/x-template")#slider-btn
+  .slider__buttons
+    .slider__button(@click="slide('prev')")
+      transition-group(name="slide-down" tag="div" class="slider__button-container")
+        div.slider__button-img-wrap(v-for="slide in prevBtnArr" :key="slide.photo")
+          img(:src="slide.photo", alt="").slider__button-pic
+    .slider__button.slider__button_next(@click="slide('next')")
+      transition-group(name="slide-up" tag="div" class="slider__button-container")
+        div.slider__button-img-wrap(v-for="slide in nextBtnArr" :key="slide.photo")
+          img(:src="slide.photo", alt="").slider__button-pic
