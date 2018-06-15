@@ -2,31 +2,40 @@
   height: 100vh;
   min-height: 600px;
   background: #f0efe9;
-  display: flex;
-  flex-flow: column wrap;
+  display: grid;
+  grid-template: 
+    "info display" 70%
+    "info buttons" 30%
+    / 1fr 1fr;
+
+  @include tablets {
+    grid-template: 
+      "display" 500px
+      "info" 200px
+      "buttons" 200px
+      / 1fr;
+  
+  }
 }
 
 .slider__info-container {
-  width: 50%;
-  height: 100%;
+  grid-area: info;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.slider__display,
-.slider__buttons {
-  width: 50%;
-}
 
 .slider__display {
-  height: 70%;
+  grid-area: display;
   background: #efebe0;
 }
 
 .slider__buttons {
-  height: 30%;
+  grid-area: buttons;
+  display: flex;
   user-select: none;
+  overflow: hidden;
 }
 
 .slider__info-title {
@@ -69,11 +78,6 @@
   display: block;
   max-width: 90%;
   max-height: 90%;
-}
-
-.slider__buttons {
-  display: flex;
-  overflow: hidden;
 }
 
 .slider__button {

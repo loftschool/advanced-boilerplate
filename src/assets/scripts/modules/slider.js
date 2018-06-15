@@ -56,25 +56,25 @@ const buttons = {
     works: Array,
     currentIndex: Number
   },
-  computed: {
-    prevBtnArr() {
-      const worksArray = [...this.works];
-      const lastItem = worksArray[worksArray.length - 1];
-
-      worksArray.unshift(lastItem);
-      worksArray.pop();
-      return [worksArray[this.currentIndex]];
-    },
-    nextBtnArr() {
-      const worksArray = [...this.works];
-      const firstItem = worksArray[0];
-
-      worksArray.push(firstItem);
-      worksArray.shift();
-      return [worksArray[this.currentIndex]];
-    }
-  },
   methods: {
+    getReqImage(btnDirection) {
+      const worksArray = [...this.works];
+
+      switch (btnDirection) {
+        case "prev":
+          const lastItem = worksArray[worksArray.length - 1];
+          worksArray.unshift(lastItem);
+          worksArray.pop();
+          break;
+
+        case "next":
+          worksArray.push(worksArray[0]);
+          worksArray.shift();
+          break;
+      }
+
+      return worksArray[this.currentIndex];
+    },
     slide(direction) {
       this.$emit("slide", direction);
     }

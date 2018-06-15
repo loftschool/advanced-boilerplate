@@ -34,9 +34,9 @@ script(type="text/x-template")#slider-btn
   .slider__buttons
     .slider__button(@click="slide('prev')")
       transition-group(name="slide-down" tag="div" class="slider__button-container")
-        div.slider__button-img-wrap(v-for="slide in prevBtnArr" :key="slide.photo")
-          img(:src="slide.photo", alt="").slider__button-pic
+        div.slider__button-img-wrap(:key="getReqImage('prev').photo")
+          img(:src="getReqImage('prev').photo", alt="").slider__button-pic
     .slider__button.slider__button_next(@click="slide('next')")
       transition-group(name="slide-up" tag="div" class="slider__button-container")
-        div.slider__button-img-wrap(v-for="slide in nextBtnArr" :key="slide.photo")
-          img(:src="slide.photo", alt="").slider__button-pic
+        div.slider__button-img-wrap(:key="getReqImage('next').photo")
+          img(:src="getReqImage('next').photo", alt="").slider__button-pic

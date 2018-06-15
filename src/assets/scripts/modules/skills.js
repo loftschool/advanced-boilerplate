@@ -40,7 +40,7 @@ new Vue({
   data: {
     skills: {}
   },
-  mounted() {
+  created() {
     const data = require("../../../data/skills.json");
     this.skills = data;
   },

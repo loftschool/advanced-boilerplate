@@ -2,13 +2,6 @@ extends ../auth.layout.pug
 
 block content
   .auth-block
-    .auth-block__content
-      .auth-block__user
-        .user.user_color_grey
-          .user__pic
-            img.user__pic-img
-          .user__description
-            .user__name Владимир Астахов
-            .user__info Личный сайт разработчика
-      .auth-block__socials
-        +socials(['vk', 'fb', 'in'], 'socials_fill_green')
+    a(href="./about.html") Обо мне
+    hr
+    a(href="./works.html") Мои работы
