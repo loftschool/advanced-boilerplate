@@ -12,7 +12,7 @@ const skill = {
       const dashOffset = parseInt(
         getComputedStyle(circle).getPropertyValue("stroke-dashoffset")
       );
-      const persents = dashOffset / 100 * (100 - this.skillPercents);
+      const persents = (dashOffset / 100) * (100 - this.skillPercents);
 
       circle.style.strokeDashoffset = persents;
     }
