@@ -4,6 +4,46 @@ const info = {
   template: "#slider-info",
   props: {
     work: Object
+  },
+  methods: {
+    callback(eventName) {
+      console.log(eventName);
+    },
+    enterHandler(el, done) {
+      const sentence = el.innerText.trim();
+      const wrapped = sentence
+        .split("")
+        .map(item => {
+          return `
+            <span class="${item === " " ? "whitespace" : ""}">${item}</span>
+          `;
+        })
+        .join("");
+
+      el.innerHTML = wrapped;
+
+      const words = Array.from(el.children);
+
+      let i = 0;
+      function animate(words) {
+        const currentLetter = words[i];
+
+        let timer = setTimeout(() => {
+          animate(words);
+        }, 20);
+
+        currentLetter.classList.add("bounceIn");
+
+        i++;
+
+        if (i >= words.length) {
+          clearTimeout(timer);
+          done();
+        }
+      }
+
+      animate(words);
+    }
   }
 };
 

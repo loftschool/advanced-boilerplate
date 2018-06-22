@@ -6,25 +6,80 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title Document
     style.
-      .fade-enter-active, .fade-leave-active {
+      .slide-enter-active, .slide-leave-active {
         transition: 1s;
       }
-      
-      .fade-enter {
+
+      .slide-enter {
+        transform: translateX(-100px);
         opacity: 0;
       }
 
-      .fade-enter-to {
+      .slide-enter-to {
+        transform: translateX(0px);
         opacity: 1;
       }
 
-      .fade-leave {
+      .slide-leave {
+        transform: translateX(0px);
         opacity: 1;
       }
 
-      .fade-leave-to {
+      .slide-leave-to {
+        transform: translateX(100px);
         opacity: 0;
       }
+
+      .slide-leave-active + li {
+        margin-top: -18px;
+      }
+
+      .block-wrapper {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 300px;
+        height: 300px;
+        margin-left: -150px;
+        margin-top: -150px;
+      }
+
+      .block {
+        height: 100%;
+      }
+
+      .block-a {
+        background: red;
+      }
+
+      .block-b {
+        background: blue;
+      }
+
+      .flip-enter-active, .flip-leave-active {
+        transition: 1s linear;
+      }
+
+      .block-wrapper {
+        perspective: 1000px;
+      }
+
+      .flip-leave {
+        transform: rotateY(0);
+      }
+
+      .flip-leave-to {
+        transform: rotateY(90deg);
+      }
+
+      .flip-enter {
+        transform: rotateY(-90deg);
+      }
+
+      .flip-enter-to {
+        transform: rotateY(0deg);
+      }
+
 
 
   body
@@ -33,11 +88,19 @@ html(lang="en")
     script(type="text/x-template")#animation
       div
         button(
-          @click="title = `Changed title ${Date.now()}`"
-        ) Показать
-        transition-group(name="fade")
-          .class(:key="title") {{ title }}
+          @click="switchComponents"
+        ) Поменять компоненты
+        transition-group(tag="ul" name="slide")
+          li(v-for="item in arr" :key="item") {{item}}
+        .block-wrapper
+          transition(name="flip" mode="out-in")
+            component(:is="compToShow")
 
+    script(type="text/x-template")#compA
+      .block.block-a
+
+    script(type="text/x-template")#compB
+      .block.block-b
 
     script(src="bootloader.bundle.js")
     script(src="vendor.bundle.js")
