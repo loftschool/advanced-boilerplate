@@ -13,6 +13,10 @@ const registerUser = (name, password) => {
   request.post(
     {
       url: config.REG_URL,
+      headers: {
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest"
+      },
       form: {
         name,
         password
@@ -22,7 +26,7 @@ const registerUser = (name, password) => {
       if (err) signale.fatal(err);
 
       switch (response.statusCode) {
-        case 302:
+        case 422:
           const newUserName = generateUsername(name);
           signale.error(
             `Такой пользователь уже существует. Попробуйте имя: ${newUserName}`

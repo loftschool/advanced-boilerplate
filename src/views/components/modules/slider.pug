@@ -18,7 +18,14 @@ script(type="text/x-template")#slider-info
     .slider__info
       .slider__info-title
         .subtitle {{work.title}} 
-      .slider__info-skills {{work.skills}}
+      
+      transition-group(
+        appear
+        tag="div" :css="false"
+        @enter="enter"
+      ) 
+        .slider__info-skills(:key="work.skills") {{work.skills}}
+      
       .slider__info-button
         a(:href="work.link" target="_blank").button Посмотреть сайт
 
@@ -29,9 +36,11 @@ script(type="text/x-template")#slider-display
 script(type="text/x-template")#slider-buttons
   .slider__buttons
     .slider__button(@click="slide('prev')")
-      .slider__button-img-wrap
-        img(:src="getReqImage('prev').photo", alt="").slider__button-pic
+      transition-group(name="slide-down" tag="div").slider__button-img-container
+        .slider__button-img-wrap(:key="getReqImage('prev').photo")
+          img(:src="getReqImage('prev').photo", alt="").slider__button-pic
     .slider__button.slider__button--next(@click="slide('next')")
-      .slider__button-img-wrap
-        img(:src="getReqImage('next').photo", alt="").slider__button-pic
+      transition-group(name="slide-up" tag="div")
+        .slider__button-img-wrap(:key="getReqImage('next').photo")
+          img(:src="getReqImage('next').photo", alt="").slider__button-pic
 

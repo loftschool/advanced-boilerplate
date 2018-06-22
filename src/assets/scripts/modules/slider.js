@@ -1,9 +1,45 @@
 import Vue from "vue";
+import { SSL_OP_COOKIE_EXCHANGE } from "constants";
 
 const info = {
   template: "#slider-info",
   props: {
     work: Object
+  },
+  methods: {
+    enter(el, done) {
+      const sentence = el.innerText.trim();
+      const wrapped = sentence
+        .split("")
+        .map(
+          item => `
+          <span class="${item === " " ? "whitespace" : ""}">${item}</span>
+        `
+        )
+        .join("");
+
+      el.innerHTML = wrapped;
+
+      const words = Array.from(el.children);
+      let i = 0;
+      function animate(words) {
+        const currentLetter = words[i];
+        let timer = setTimeout(() => {
+          animate(words);
+        }, 20);
+
+        currentLetter.classList.add("bounceIn");
+        i++;
+
+        if (i >= words.length) {
+          clearTimeout(timer);
+        }
+      }
+
+      animate(words);
+
+      done();
+    }
   }
 };
 
