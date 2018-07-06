@@ -1,0 +1,42 @@
+script(type="text/x-template")#auth-form
+  div
+    .modal-form__row
+      label.iconed-input
+        input(
+          type="text" 
+          placeholder="Логин"
+          v-model="user.name"
+        ).iconed-input__elem
+        i.iconed-input__icon
+          +icon('login', 'iconed-input__icon-pic')
+    .modal-form__row
+      label.iconed-input
+        input(
+          type="password" 
+          placeholder="Пароль"
+          v-model="user.password"
+        ).iconed-input__elem
+        i.iconed-input__icon
+          +icon('password', 'iconed-input__icon-pic')
+    .modal-form__row
+      .modal-form__controlls
+        label.form-control
+          input(type="checkbox").form-control__element
+          .form-control__appearence
+          .form-control__text Я человек
+      .modal-form__controlls
+        h3.modal-form__controlls-title Вы точно не робот?
+        .modal-form__controlls-group
+          label.form-control.form-control_radio
+            input(type="radio" name="robo").form-control__element
+            .form-control__appearence
+            .form-control__text Да
+          label.form-control.form-control_radio
+            input(type="radio" name="robo").form-control__element
+            .form-control__appearence
+            .form-control__text Нет
+            
+    .modal-form__buttons
+      button.modal-form__button На главную
+      button.modal-form__button(@click="login") Войти
+
