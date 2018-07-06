@@ -25,7 +25,7 @@ const skills = {
       });
     },
     fetchSkills({ commit, getters }) {
-      return this.$axios.get(`/skills/${getters.userId}`).then(response => {
+      return this.$axios.get(`/skills/1`).then(response => {
         commit("fillUpSkills", response.data);
       });
     }

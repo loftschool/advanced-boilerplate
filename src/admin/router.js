@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "./store";
-import axios from "axios";
+import axios from "./requests";
 
 Vue.use(VueRouter);
 
@@ -41,10 +41,10 @@ router.beforeEach((to, from, next) => {
     .get("/user")
     .then(response => {
       // next();
-      console.log("next");
     })
     .catch(error => {
-      console.log("window.location.href");
+      console.log("error in router");
+      // localStorage.removeItem("token");
       // window.location.href = "//google.com";
     });
 

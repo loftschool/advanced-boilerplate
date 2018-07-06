@@ -1,5 +1,6 @@
 <template lang="pug">
   #about
+    button(@click="logout()") Выйти
     h1 Страница обо мне
     skillsRow(
       v-for="type in types"
@@ -35,14 +36,14 @@ export default {
   },
   watch: {
     userId() {
-      this.fetchSkills();
+      // this.fetchSkills();
     }
   },
   created() {
     this.fetchSkills();
   },
   methods: {
-    ...mapActions(["fetchSkills", "getUserInfo"])
+    ...mapActions(["fetchSkills", "getUserInfo", "logout"])
   }
 };
 </script>

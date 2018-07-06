@@ -5,6 +5,9 @@ const user = {
   mutations: {
     fillUpUserData(state, user) {
       state.userdata = user;
+    },
+    clearUserData(state) {
+      state.userdata = {};
     }
   },
   getters: {
@@ -23,6 +26,13 @@ const user = {
           }
         )
         .catch(e => console.error(e));
+    },
+    logout({ commit }) {
+      return this.$axios.post("/logout").then(response => {
+        console.log("logout response", response);
+        localStorage.removeItem("token");
+        commit("clearUserData");
+      });
     }
   }
 };

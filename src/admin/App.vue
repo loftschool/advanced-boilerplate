@@ -30,6 +30,12 @@ export default {
     appHeader: header,
     tabs,
     skills
+  },
+  created() {
+    // this.getUserInfo();
+  },
+  methods: {
+    ...mapActions(["getUserInfo"])
   }
 };
 </script>
