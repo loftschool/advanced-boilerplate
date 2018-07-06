@@ -1,14 +1,12 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import store from "./store";
-import axios from "./requests";
+import axios from "axios";
 
 Vue.use(VueRouter);
 
-axios.defaults.baseURL = "http://localhost:8000";
-axios.defaults.headers["Authorization"] = `Bearer ${localStorage.getItem(
-  "token"
-)}`;
+const guard = axios.create({
+  baseURL: "http://localhost:8000"
+});
 
 import skills from "./components/skills.vue";
 import header from "./components/header.vue";
@@ -37,18 +35,22 @@ const routes = [
 const router = new VueRouter({ routes });
 
 router.beforeEach((to, from, next) => {
-  axios
-    .get("/user")
+  guard
+    .get("/user", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    })
     .then(response => {
-      // next();
+      next();
     })
     .catch(error => {
       console.log("error in router");
-      // localStorage.removeItem("token");
-      // window.location.href = "//google.com";
+      localStorage.removeItem("token");
+      window.location.href = "//google.com";
     });
 
-  next();
+  // next();
 });
 
 export default router;
