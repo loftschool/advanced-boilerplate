@@ -119,7 +119,6 @@ gulp.task("images", () => {
       `${config.SRC_DIR}/images/**/*.*`,
       `!${config.SRC_DIR}/images/icons/*.*`
     ])
-    .pipe($gp.if(env === "production", $gp.imagemin()))
     .pipe(gulp.dest(`${config.DIST_DIR}/assets/images/`));
 });
 
