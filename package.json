@@ -10,7 +10,7 @@
   "scripts": {
     "dev:mpa": "cross-env NODE_ENV=development gulp",
     "dev:spa": "webpack-dev-server --mode=development --config webpack.spa.config.js --open --hot",
-    "build": "cross-env NODE_ENV=production gulp build; webpack --mode=production --config webpack.spa.config.js --progress --hide-modules",
+    "build": "cross-env NODE_ENV=production gulp build && webpack --mode=production --config webpack.spa.config.js --progress --hide-modules",
     "reg": "node reg-util.js"
   },
   "keywords": [],
