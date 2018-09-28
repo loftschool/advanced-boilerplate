@@ -20,5 +20,5 @@ new Vue({
       currentComponent: "compA"
     };
   },
-  template: "#animation"
+  template: "#animation-block"
 });
