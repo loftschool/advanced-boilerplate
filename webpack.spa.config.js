@@ -1,8 +1,9 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
-module.exports = {
+const config = {
   entry: {
     admin: path.resolve(__dirname, "src/admin/main.js")
   },
@@ -73,28 +74,23 @@ module.exports = {
   ]
 };
 
-if (process.env.NODE_ENV) {
-  module.exports.entry = Object.assign(module.exports.entry, {
-    admin: path.resolve(__dirname, "src/admin/main.js")
-  });
-}
-
-if (process.env.NODE_ENV === "production") {
-  module.exports.devtool = "";
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
-  ]);
-}
+module.exports = (env, argv) => {
+  if (argv.mode === "production") {
+    config.devtool = "";
+    config.plugins = (config.plugins || []).concat([
+      new webpack.LoaderOptionsPlugin({
+        minimize: true
+      })
+    ]);
+    config.optimization = {
+      minimizer: [
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            warnings: false
+          }
+        })
+      ]
+    };
+  }
+  return config;
+};

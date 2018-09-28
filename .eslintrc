@@ -1,10 +1,12 @@
 {
-  "extends": ["plugin:prettier/recommended", "plugin:vue/recommended"],
+  "extends": ["plugin:vue/recommended", "eslint:recommended"],
   "parser": "vue-eslint-parser",
-  "plugins": [
-    "prettier"
-  ],
-  "rules": {
-    "prettier/prettier": "error"
+  "rules" : {
+    "no-console" : "off"
+  },
+  "env": {
+    "node" : true,
+    "es6" : true,
+    "browser" : true
   }
 }

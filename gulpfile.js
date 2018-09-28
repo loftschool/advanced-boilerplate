@@ -42,7 +42,15 @@ gulp.task("scripts", () => {
   return gulp
     .src(`${config.SRC_DIR}/scripts/*.js`)
     .pipe($gp.plumber())
-    .pipe($webpack(require("./webpack.mpa.config"), webpack))
+    .pipe(
+      $webpack(
+        {
+          ...require("./webpack.mpa.config"),
+          mode: env
+        },
+        webpack
+      )
+    )
     .pipe(gulp.dest(`${config.DIST_DIR}`))
     .pipe(reload({ stream: true }));
 });
@@ -111,7 +119,6 @@ gulp.task("images", () => {
       `${config.SRC_DIR}/images/**/*.*`,
       `!${config.SRC_DIR}/images/icons/*.*`
     ])
-    .pipe($gp.if(env === "production", $gp.imagemin()))
     .pipe(gulp.dest(`${config.DIST_DIR}/assets/images/`));
 });
 

@@ -2,6 +2,7 @@ const fs = require("fs");
 
 module.exports = {
   syntax: "postcss-scss",
+  parser: "postcss-scss",
   plugins: [
     require("postcss-easy-import")({
       extensions: ".scss"
@@ -17,7 +18,6 @@ module.exports = {
     }),
     require("postcss-nested"),
     require("postcss-rgb"),
-    require("postcss-inline-comment"),
     require("postcss-inline-svg")({
       removeFill: true,
       path: "./src/assets/images/icons"

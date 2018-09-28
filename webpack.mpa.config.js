@@ -1,5 +1,4 @@
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const webpack = require("webpack");
 const env = process.env.NODE_ENV;
 
 module.exports = {
@@ -7,15 +6,13 @@ module.exports = {
     about: "./src/assets/scripts/about.js",
     auth: "./src/assets/scripts/auth.js",
     works: "./src/assets/scripts/works.js",
-    blog: "./src/assets/scripts/blog.js",
-    vendor: ["vue"]
+    blog: "./src/assets/scripts/blog.js"
   },
   output: {
-    filename: "[name].bundle.js",
-    chunkFilename: "[name].bundle.js"
+    filename: "[name].bundle.js"
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         loader: "babel-loader",
@@ -29,12 +26,18 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new UglifyJsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ["vendor", "bootloader"]
-    })
-  ],
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          warnings: false,
+          compress: {
+            drop_console: true
+          }
+        }
+      })
+    ]
+  },
   resolve: {
     alias: {
       vue$:
@@ -43,12 +46,3 @@ module.exports = {
   },
   devtool: env === "development" ? "#eval-source-map" : ""
 };
-
-if (env === "production") {
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
-      warnings: false
-    })
-  ]);
-}
