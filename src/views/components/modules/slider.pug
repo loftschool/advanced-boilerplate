@@ -1,0 +1,50 @@
+script(type="text/x-template")#slider
+  .slider
+    info(
+      :work="currentWork"
+    )
+    display(
+      :work="currentWork"
+    )
+    buttons(
+      :works="works"
+      :currentIndex="currentIndex"
+      @slide="handleSlide"
+    )
+    
+
+script(type="text/x-template")#slider-info
+  .slider__info-container
+    .slider__info
+      .slider__info-title
+        .subtitle {{work.title}}
+
+      img(src="/default.jpg", srcset="/large.png 1000w, med.png 768px, min.png 480w" 
+        sizes="(max-width: 768px) 300px, (max-width: 1000) 800px" 
+      alt="")
+      transition-group(
+        appear
+        :css="false"
+        @before-enter="callback('before-enter')"
+        @after-enter="callback('after-enter')"
+        @enter="enterHandler"
+      )
+        .slider__info-skills(:key="work.skills") {{work.skills}}
+      .slider__info-button
+        a(:href="work.link" target="_blank").button Посмотреть сайт
+
+script(type="text/x-template")#slider-display
+  .slider__display
+    img(:src="work.photo").slider__big-pic
+
+script(type="text/x-template")#slider-buttons
+  .slider__buttons
+    .slider__button(@click="slide('prev')")
+      transition-group(name="slide-down" tag="div").slider__button-img-container
+        .slider__button-img-wrap(:key="getReqImage('prev').photo")
+          img(:src="getReqImage('prev').photo", alt="").slider__button-pic
+    .slider__button.slider__button--next(@click="slide('next')")
+      transition-group(name="slide-up" tag="div").slider__button-img-container
+        .slider__button-img-wrap(:key="getReqImage('next').photo")
+          img(:src="getReqImage('next').photo", alt="").slider__button-pic
+

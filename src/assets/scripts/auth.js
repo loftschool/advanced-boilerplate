@@ -1,1 +1,2 @@
-console.log("auth module loaded");
+import "./modules/auth-btn";
+import "./modules/login";

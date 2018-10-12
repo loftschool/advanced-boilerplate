@@ -1,6 +1,6 @@
 {
   "name": "advanced-boilerplate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/loftschool/advanced-boilerplate.git"
@@ -68,11 +68,15 @@
     "not ie <= 8"
   ],
   "dependencies": {
+    "axios": "^0.18.0",
     "normalize.css": "^7.0.0",
     "promptly": "^3.0.3",
     "pug": "^2.0.3",
     "request": "^2.87.0",
     "signale": "^1.1.0",
-    "vue": "2.5.13"
+    "vue": "2.5.13",
+    "vue-axios-plugin": "^1.3.0",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   }
 }
