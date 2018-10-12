@@ -1,11 +1,11 @@
 <template lang="pug">
   #root
     .header
-      router-view(name="header")
+      app-header
     .tabs
-      router-view(name="tabs")
+      tabs
     .content
-      router-view
+      skills
 </template>
 
 <script>
