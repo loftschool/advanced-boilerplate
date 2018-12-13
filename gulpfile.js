@@ -83,7 +83,10 @@ gulp.task("svg", done => {
       $gp.svgmin({
         js2svg: {
           pretty: true
-        }
+        },
+        plugins: [
+
+        ]
       })
     )
     .pipe(
@@ -92,9 +95,7 @@ gulp.task("svg", done => {
           $("[fill], [stroke], [style], [width], [height]")
             .removeAttr("fill")
             .removeAttr("stroke")
-            .removeAttr("style")
-            .removeAttr("width")
-            .removeAttr("height");
+            .removeAttr("style");
         },
         parserOptions: { xmlMode: true }
       })
